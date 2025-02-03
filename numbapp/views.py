@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from . import utils
+import re
 
 
 @api_view(["GET"])
@@ -25,12 +26,10 @@ def analyzeNum(request):
              },
             status=status.HTTP_400_BAD_REQUEST,
         )
-    if not number.isdigit():
+    # Validate number format (allow negative integers but not decimals)
+    if not re.match(r"^-?\d+$", number):
         return Response(
-            {
-                "number":number,
-                "error": True
-             },
+            {"message": number, "error": True},
             status=status.HTTP_400_BAD_REQUEST,
         )
 
@@ -42,10 +41,10 @@ def analyzeNum(request):
     # Return the analyzed data for the number
     data = {
         "number": number,
-        "is_prime": utils.is_num_prime(number),
-        "is_perfect": utils.is_num_perfect(number),
-        "properties": utils.return_num_properties(number),
-        "digit_sum": utils.sum_number_digit(number),
+        "is_prime": utils.is_num_prime(abs(abs(number))),
+        "is_perfect": utils.is_num_perfect(abs(number)),
+        "properties": utils.return_num_properties(abs(number)),
+        "digit_sum": utils.sum_number_digit(abs(number)),
         "fun_fact": utils.get_funfact_for_number(number),
     }
 
