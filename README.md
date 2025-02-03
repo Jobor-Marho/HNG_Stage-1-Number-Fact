@@ -24,7 +24,7 @@ Numb App is a Django-based web application that takes a number as input and retu
 
 Make a **GET** request to the following endpoint:
 
-- /api/classify-number?number=<any valid positive number>
+- /api/classify-number?number=any positive whole number
 
 ### Response
 
@@ -55,7 +55,7 @@ Make a **GET** request to the following endpoint:
 ### Installation
 
 - **Clone the Repo**: - git clone https://github.com/your-username/numb-app.git
-  cd numb-app
+- cd numb-app
 - **Install Dependencies**:
 - Install the required packages from **requirements.txt**:
   - pip install -r requirements.txt

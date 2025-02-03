@@ -17,10 +17,10 @@ def analyzeNum(request):
 
     # If 'number' is missing or invalid, return a 400 response
     if not number or not number.isdigit():
-        
+
         return Response(
             {
-                "number":"alphabet",
+                "number":number,
                 "error": True
              },
             status=status.HTTP_400_BAD_REQUEST,
