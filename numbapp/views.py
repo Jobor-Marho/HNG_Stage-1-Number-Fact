@@ -16,8 +16,16 @@ def analyzeNum(request):
     number = request.query_params.get("number")
 
     # If 'number' is missing or invalid, return a 400 response
-    if not number or not number.isdigit():
+    if number is None:
 
+        return Response(
+            {
+                "number":"Missing number",
+                "error": True
+             },
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+    if not number.isdigit():
         return Response(
             {
                 "number":number,
@@ -25,6 +33,8 @@ def analyzeNum(request):
              },
             status=status.HTTP_400_BAD_REQUEST,
         )
+
+
 
     # Convert 'number' to an integer
     number = int(number)
